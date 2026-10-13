@@ -35,15 +35,23 @@ http://localhost:3000.
 
 ```sh
 npm test -- --watchAll=false
+npm run test:ci
 npm run build
 ```
 
 Testy sprawdzają stronę startową, nawigację, przeliczanie składników
-we wszystkich jednostkach docelowych oraz czyszczenie formularza.
+we wszystkich jednostkach docelowych oraz czyszczenie formularza. Testy licznika
+treningowego obejmują minimalne ustawienia, odliczanie i zatrzymywanie przerw,
+alarm oraz zakończenie i ponowne rozpoczęcie treningu. Dźwięk jest zastępowany
+mockiem, a odliczanie korzysta z kontrolowanego zegara testowego.
 Build produkcyjny trafia do katalogu `build`.
 
 Repozytorium zawiera workflow wdrożenia do Azure Static Web Apps uruchamiany
 przy pushu na `main` i obsłudze pull requestów do tej gałęzi.
+Przed wdrożeniem workflow instaluje zależności przez `npm ci` i uruchamia
+`npm run test:ci` na Node.js 22. Nieudane testy blokują krok wdrożenia.
+Testy uruchamiają się dla pushów na `main` oraz otwieranych, aktualizowanych
+i ponownie otwieranych pull requestów do `main`.
 Konfiguracja `public/staticwebapp.config.json` zapewnia obsługę tras SPA.
 
 Pliki tekstowe używają końców linii LF, zgodnie z `.gitattributes`.

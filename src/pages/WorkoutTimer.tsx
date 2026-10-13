@@ -39,7 +39,7 @@ const WorkoutTimer = () => {
   const getCompletedSetsImages = () => {
     let dogsImages = [];
     for (let i = 0; i < numberOfSetsCompleted; i++) {
-      dogsImages.push(<img src='dog.png' alt='woof!' style={dogImageStyle} />);
+      dogsImages.push(<img key={i} src='dog.png' alt='woof!' style={dogImageStyle} />);
     }
     return dogsImages;
   };
@@ -47,7 +47,7 @@ const WorkoutTimer = () => {
   const getSetsImages = () => {
     let dogsImages = [];
     for (let i = 0; i < numberOfSets; i++) {
-      dogsImages.push(<img src='dog.png' alt='woof!' style={dogImageStyle} />);
+      dogsImages.push(<img key={i} src='dog.png' alt='woof!' style={dogImageStyle} />);
     }
     return dogsImages;
   };
