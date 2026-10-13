@@ -59,6 +59,7 @@ const theme = createTheme({
         },
         body: {
           minHeight: '100vh',
+          '@supports (min-height: 100svh)': { minHeight: '100svh' },
           background: 'radial-gradient(ellipse at top left, #FFE5D4 0%, transparent 55%), radial-gradient(ellipse at bottom right, #FFE5E5 0%, transparent 65%), #FFF7F0',
         },
         'a:focus-visible': focusRing,

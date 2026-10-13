@@ -68,7 +68,8 @@ code {
 @keyframes result-appear { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
 .alarm-indicator { display: flex; align-items: center; justify-content: center; }
-.alarm-indicator .alarm-bell { width: clamp(3.5rem, 12vw, 6rem); height: clamp(3.5rem, 12vw, 6rem); font-size: clamp(3.5rem, 12vw, 6rem); flex-shrink: 0; transform-origin: 50% 15%; }
+.alarm-indicator .alarm-bell { width: 80px; height: 80px; font-size: 80px; flex-shrink: 0; transform-origin: 50% 15%; }
+.workout-content .workout-time { font-size: 80px; line-height: 1.1; font-variant-numeric: tabular-nums; }
 @media (prefers-reduced-motion: no-preference) {
   .alarm-bell { animation: alarm-ring 0.65s ease-in-out infinite; }
 }

@@ -252,7 +252,7 @@ const WorkoutTimer = () => {
                   </Typography>
                 </div>
                 <div className='row' style={rowStyle}>
-                  <Typography variant='h1' component='h3' color='secondary.main' sx={{ mb: 1 }}>
+                  <Typography className='workout-time' variant='h1' component='h3' color='secondary.main' sx={{ mb: 1 }}>
                     {brakeTime}
                   </Typography>
                 </div>
@@ -335,7 +335,7 @@ const WorkoutTimer = () => {
                       </div>
                     ) : (
                       <>
-                        <Typography variant='h1' component='h3' color='secondary.main'>{workoutFinished ? 0 : counter}</Typography>
+                        <Typography className='workout-time' variant='h1' component='h3' color='secondary.main'>{workoutFinished ? 0 : counter}</Typography>
                         <Typography color='text.secondary' variant='body2'>seconds</Typography>
                       </>
                     )}
