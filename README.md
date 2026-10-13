@@ -65,3 +65,16 @@ a pull request korzysta z dotychczasowego mechanizmu środowisk podglądu Azure.
 Konfiguracja `public/staticwebapp.config.json` zapewnia obsługę tras SPA.
 
 Pliki tekstowe używają końców linii LF, zgodnie z `.gitattributes`.
+
+## Ikona instalowanej aplikacji
+
+Manifest używa nazwy **MultiTool** i czarno-białej ikony psa z plakietką młotka
+i klucza. Źródło wektorowe znajduje się w `public/multitool-icon.svg`.
+Gotowe eksporty obejmują PNG 192×192 i 512×512, ikonę Apple 180×180,
+favicon 16/32/48 px oraz osobną ikonę maskable 512×512. W wersji maskable
+grafika jest skalowana do 58% i centrowana na białym tle, aby mieściła się
+w bezpiecznym okręgu o promieniu 40% szerokości obrazu.
+
+CI sprawdza nazwę aplikacji, wpisy manifestu, wymiary plików PNG,
+metadane Apple i rozmiary ikon zawartych w faviconie. Pliki graficzne są
+przechowywane w repozytorium; build nie wymaga ich generowania.
