@@ -95,7 +95,7 @@ const Converter = () => {
     const targetAmount = getTargetAmount(
       targetAmountInGrams,
       Number(converterModel.UnitTarget),
-      baseProduct!,
+      targetProduct,
     );
 
     setConverterModel({

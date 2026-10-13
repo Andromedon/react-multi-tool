@@ -1,46 +1,49 @@
-# Getting Started with Create React App
+# MultiTool
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MultiTool to aplikacja webowa z dwoma narzędziami: przelicznikiem składników
+kuchennych i licznikiem przerw pomiędzy seriami treningowymi.
 
-## Available Scripts
+## Funkcje
 
-In the project directory, you can run:
+- **Converter** (`/converter`) — przelicza ilości masła, oleju i margaryny
+  z uwzględnieniem stężeń i gęstości zapisanych w kodzie. Obsługuje gramy,
+  mililitry i szklanki o pojemności 250 ml. Wynik ma dwa miejsca po przecinku.
+- **Workout Timer** (`/workouttimer`) — pozwala ustawić liczbę serii oraz czas
+  przerwy, oznaczać wykonane serie i odliczać odpoczynek. Domyślne ustawienia
+  to 5 serii i 60 sekund. Koniec przerwy sygnalizuje alarm oraz wibracja,
+  jeśli urządzenie ją obsługuje. Utrzymywanie włączonego ekranu zależy od
+  obsługi Screen Wake Lock przez przeglądarkę.
+- **Home** (`/`) — strona powitalna. Menu dostosowuje się do szerokości ekranu.
 
-### `npm start`
+Aplikacja działa w przeglądarce, bez backendu i kont użytkowników.
+Ustawienia oraz postęp treningu nie są zapisywane po odświeżeniu strony.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Uruchomienie
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Projekt używa React 18, TypeScript, Material UI i Create React App.
+Wymaga Node.js oraz npm.
 
-### `npm test`
+```sh
+npm ci
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Serwer deweloperski domyślnie udostępnia aplikację pod adresem
+http://localhost:3000.
 
-### `npm run build`
+## Weryfikacja i build
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+npm test -- --watchAll=false
+npm run build
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Testy sprawdzają stronę startową, nawigację, przeliczanie składników
+we wszystkich jednostkach docelowych oraz czyszczenie formularza.
+Build produkcyjny trafia do katalogu `build`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Repozytorium zawiera workflow wdrożenia do Azure Static Web Apps uruchamiany
+przy pushu na `main` i obsłudze pull requestów do tej gałęzi.
+Konfiguracja `public/staticwebapp.config.json` zapewnia obsługę tras SPA.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Pliki tekstowe używają końców linii LF, zgodnie z `.gitattributes`.
