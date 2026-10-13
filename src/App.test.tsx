@@ -18,7 +18,7 @@ test('shows the home page and navigation to both tools', () => {
   render(<App />);
 
   expect(screen.getByRole('heading', {
-    name: "Welcome to Andro's MultiTool App :)",
+    name: 'Your everyday toolkit.',
   })).toBeInTheDocument();
   expect(screen.getAllByRole('link', { name: 'Converter' })[0])
     .toHaveAttribute('href', '/converter');
@@ -43,10 +43,14 @@ test.each([
 
   await type(screen.getByRole('textbox'), '100');
   await click(screen.getAllByRole('radio', { name: unit })[1]);
+  expect(screen.getAllByRole('radio', { name: 'grams' })[0]).toBeChecked();
   await click(screen.getByRole('button', { name: 'Convert' }));
 
   const result = container.querySelector('strong');
   expect(result).toHaveTextContent(expected);
+  expect(container.querySelector('.result-unit')).toHaveTextContent(
+    unit === 'grams' ? 'g' : unit === 'milliliters' ? 'ml' : 'glasses',
+  );
 
   await click(screen.getByRole('button', { name: 'Clear' }));
   expect(screen.getByRole('textbox')).toHaveValue('');

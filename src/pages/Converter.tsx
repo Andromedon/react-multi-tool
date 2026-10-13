@@ -17,16 +17,18 @@ import {
 import { Product } from '../types/Product';
 import {
   getBaseAmountInGrams,
-  getColor,
   getProducts,
   getTargetAmount,
 } from '../services/converter-service';
 import { ProductUnit } from '../types/ProductUnit';
 import { ConverterModel } from '../types/ConverterModel';
+import { warmGradients } from '../theme';
+import ToolHeader from '../components/ToolHeader';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 const title = 'Converter';
 const rowStyle = {
-  margin: '0.5rem',
+  margin: '0 0 1rem',
 };
 
 const targetAmountRowStyle = {
@@ -69,6 +71,9 @@ const Converter = () => {
   const [converterModel, setConverterModel] =
     useState<ConverterModel>(emptyConverterModel);
 
+  const [resultUnit, setResultUnit] = useState(ProductUnit.Grams);
+  const [resultProduct, setResultProduct] = useState('');
+
   const handleConvert = () => {
     const baseProduct = products.find(
       (p) => p.id === Number(converterModel?.ProductBaseId),
@@ -98,6 +103,8 @@ const Converter = () => {
       targetProduct,
     );
 
+    setResultUnit(converterModel.UnitTarget);
+    setResultProduct(targetProduct.name);
     setConverterModel({
       ...converterModel,
       AmountTarget: Array.from(targetAmount.toFixed(2)),
@@ -106,13 +113,15 @@ const Converter = () => {
 
   const handleReset = () => {
     setConverterModel(emptyConverterModel);
+    setResultProduct('');
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <div className='container-fluid'>
+    <form className='converter-form' onSubmit={(e) => e.preventDefault()}>
+      <ToolHeader title='Converter' description='Find the right amount for your next ingredient swap.' icon={<AutorenewIcon />} />
+      <div className='converter-grid'>
         <div className='row' style={rowStyle}>
-          <Card sx={{ minWidth: 275, background: '#d4eafd' }}>
+          <Card sx={{ height: '100%', background: warmGradients.peach }}>
             <CardContent>
               <div className='row' style={rowStyle}>
                 <Typography variant='subtitle1' component='h3' sx={{ mb: 1 }}>
@@ -122,14 +131,14 @@ const Converter = () => {
               <div className='row' style={rowStyle}>
                 <Box sx={{ minWidth: 120 }}>
                   <FormControl fullWidth>
-                    <Typography variant='subtitle2' component='h4'>
+                    <Typography id='base-product-label' variant='subtitle2' component='h4'>
                       Product
                     </Typography>
                     <Select
                       required
                       size='small'
-                      labelId='product-select-label'
-                      id='product'
+                      labelId='base-product-label'
+                      id='base-product'
                       value={converterModel?.ProductBaseId?.toString()}
                       onChange={(event: SelectChangeEvent<string>) => {
                         setConverterModel({
@@ -137,7 +146,6 @@ const Converter = () => {
                           ProductBaseId: event.target.value,
                         });
                       }}
-                      sx={{ backgroundColor: 'white' }}
                     >
                       {products.map((product) => (
                         <MenuItem key={product.id} value={product.id}>
@@ -151,13 +159,13 @@ const Converter = () => {
               <div className='row' style={rowStyle}>
                 <Box sx={{ minWidth: 120 }}>
                   <FormControl>
-                    <Typography variant='subtitle2' component='h3'>
+                    <Typography id='base-unit-label' variant='subtitle2' component='h3'>
                       Unit
                     </Typography>
                     <RadioGroup
                       row
-                      aria-labelledby='demo-row-radio-buttons-group-label'
-                      name='row-radio-buttons-group'
+                      aria-labelledby='base-unit-label'
+                      name='base-unit'
                       value={converterModel.UnitBase}
                       onChange={(
                         event: React.ChangeEvent<HTMLInputElement>,
@@ -202,7 +210,6 @@ const Converter = () => {
                       variant='outlined'
                       value={converterModel?.AmountBase}
                       inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-                      sx={{ backgroundColor: 'white' }}
                       onChange={(
                         event: React.ChangeEvent<HTMLInputElement>,
                       ) => {
@@ -219,7 +226,7 @@ const Converter = () => {
           </Card>
         </div>
         <div className='row' style={rowStyle}>
-          <Card sx={{ minWidth: 275, background: '#e3f2e3' }}>
+          <Card sx={{ height: '100%', background: warmGradients.rose }}>
             <CardContent>
               <div className='row' style={rowStyle}>
                 <Typography variant='subtitle1' component='h3' sx={{ mb: 1 }}>
@@ -229,14 +236,14 @@ const Converter = () => {
               <div className='row' style={rowStyle}>
                 <Box sx={{ minWidth: 120 }}>
                   <FormControl fullWidth>
-                    <Typography variant='subtitle2' component='h4'>
+                    <Typography id='target-product-label' variant='subtitle2' component='h4'>
                       Product
                     </Typography>
                     <Select
                       required
                       size='small'
-                      labelId='product-select-label'
-                      id='product'
+                      labelId='target-product-label'
+                      id='target-product'
                       value={converterModel?.ProductTargetId?.toString()}
                       onChange={(event: SelectChangeEvent<string>) => {
                         setConverterModel({
@@ -244,7 +251,6 @@ const Converter = () => {
                           ProductTargetId: event.target.value,
                         });
                       }}
-                      sx={{ backgroundColor: 'white' }}
                     >
                       {products.map((product) => (
                         <MenuItem key={product.id} value={product.id}>
@@ -258,13 +264,13 @@ const Converter = () => {
               <div className='row' style={rowStyle}>
                 <Box sx={{ minWidth: 120 }}>
                   <FormControl>
-                    <Typography variant='subtitle2' component='h3'>
+                    <Typography id='target-unit-label' variant='subtitle2' component='h3'>
                       Unit
                     </Typography>
                     <RadioGroup
                       row
-                      aria-labelledby='demo-row-radio-buttons-group-label'
-                      name='row-radio-buttons-group'
+                      aria-labelledby='target-unit-label'
+                      name='target-unit'
                       value={converterModel.UnitTarget}
                       onChange={(
                         event: React.ChangeEvent<HTMLInputElement>,
@@ -305,17 +311,21 @@ const Converter = () => {
                   </FormControl>
                 </Box>
               </div>
-              <div className='row' style={targetAmountRowStyle}>
+              <div className={`result-panel${converterModel.AmountTarget.length ? ' has-result' : ''}`} style={targetAmountRowStyle} aria-live='polite' aria-atomic='true'>
                 <Box sx={{ minWidth: 120 }}>
                   <FormControl fullWidth>
-                    <Typography variant='h3' component='h3'>
+                    <Typography variant='h3' component='h3' color='secondary.main' sx={{ overflowWrap: 'anywhere' }}>
                       <strong>
-                        {converterModel?.AmountTarget?.map((amountPart, i) => (
-                          <span key={i} style={{ color: `${getColor(i)}` }}>
-                            {amountPart}
-                          </span>
-                        ))}
+                        {converterModel.AmountTarget.join('')}
                       </strong>
+                      {converterModel.AmountTarget.length > 0 && (
+                        <span className='result-unit'>
+                          {resultUnit === ProductUnit.Grams ? 'g' : resultUnit === ProductUnit.Milliliters ? 'ml' : 'glasses'}
+                        </span>
+                      )}
+                    </Typography>
+                    <Typography color='text.secondary' sx={{ mt: 1 }}>
+                      {converterModel.AmountTarget.length ? `of ${resultProduct}` : 'Your converted amount will appear here.'}
                     </Typography>
                   </FormControl>
                 </Box>
@@ -324,12 +334,12 @@ const Converter = () => {
           </Card>
         </div>
 
-        <div className='row' style={buttonRowStyle}>
+        <div className='converter-actions' style={buttonRowStyle}>
           <div style={buttonStyle}>
             <Button
               size='large'
-              variant='contained'
-              color='error'
+              variant='outlined'
+              color='secondary'
               onClick={handleReset}
             >
               Clear

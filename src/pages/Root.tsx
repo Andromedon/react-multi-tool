@@ -5,7 +5,9 @@ function Root() {
   return (
     <>
       <ResponsiveAppBar />
-      <Outlet />
+      <main className="app-content">
+        <Outlet />
+      </main>
     </>
   );
 }

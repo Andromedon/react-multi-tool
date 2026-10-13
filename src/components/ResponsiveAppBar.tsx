@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import HomeIcon from '@mui/icons-material/Home';
@@ -15,6 +14,7 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 import AlarmOnIcon from '@mui/icons-material/AlarmOn';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { warmColors } from '../theme';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material';
 
@@ -29,15 +29,29 @@ type Page = {
 const LargeStyledLink = styled(NavLink)`
   color: white;
   text-decoration: none;
-  margin: 1rem;
+  font-weight: 600;
+  margin: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  &:hover { background: rgba(255, 255, 255, 0.06); }
+  &[aria-current='page'] { background: rgba(255, 255, 255, 0.06); font-weight: 700; }
+  &:focus-visible { outline: 3px solid white; outline-offset: 2px; }
 `;
 
 const SmallStyledLink = styled(NavLink)`
-  color: black;
+  color: ${warmColors.text};
   text-decoration: none;
-  margin: 1rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0.75rem;
+  border-radius: 8px;
   position: relative;
+  &[aria-current='page'] { background: #FFE4EC; color: ${warmColors.pink}; font-weight: 700; }
 `;
 
 const pages: Page[] = [
@@ -73,9 +87,9 @@ function ResponsiveAppBar() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
+              fontFamily: 'inherit',
+              fontWeight: 800,
+              letterSpacing: '.04em',
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -86,7 +100,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size='large'
-              aria-label='account of current user'
+              aria-label='Open navigation menu'
               aria-controls='menu-appbar'
               aria-haspopup='true'
               onClick={handleOpenNavMenu}
@@ -135,9 +149,9 @@ function ResponsiveAppBar() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
+              fontFamily: 'inherit',
+              fontWeight: 800,
+              letterSpacing: '.04em',
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -147,12 +161,8 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <LargeStyledLink to={page.href} key={page.name}>
-                <Button sx={{ color: 'white' }}>
-                  {React.createElement(page.icon, {
-                    sx: { mr: 1 },
-                  })}
-                  {page.name}
-                </Button>
+                {React.createElement(page.icon)}
+                {page.name}
               </LargeStyledLink>
             ))}
           </Box>

@@ -1,20 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-labelledby="title">
   <title id="title">MultiTool — dog with crossed hammer and wrench</title>
-  <rect width="512" height="512" fill="white"/>
   <g id="artwork">
-    <g fill="white" stroke="black" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="#FFF7F0" stroke="#C2410C" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
       <path d="M171 82 C135 48 103 77 76 115 C54 145 43 171 48 197 C52 223 81 237 111 218 L171 82Z"/>
       <path d="M341 82 C377 48 409 77 436 115 C458 145 469 171 464 197 C460 223 431 237 401 218 L341 82Z"/>
       <path d="M256 48 C193 48 157 73 137 124 C117 175 100 259 98 324 C94 405 148 448 256 448 C364 448 418 405 414 324 C412 259 395 175 375 124 C355 73 319 48 256 48Z"/>
       <path d="M214 286 C229 274 283 274 298 286 C311 303 283 333 256 339 C229 333 201 303 214 286Z"/>
       <path d="M256 339 V434"/>
     </g>
-    <g fill="black">
+    <g fill="#C2410C">
       <circle cx="207" cy="207" r="19"/>
       <circle cx="305" cy="207" r="19"/>
     </g>
-    <circle cx="414" cy="414" r="72" fill="white" stroke="black" stroke-width="5"/>
+    <circle cx="414" cy="414" r="72" fill="#FFF7F0" stroke="#C2410C" stroke-width="5"/>
     <!-- Material UI Construction icon: the same hammer and wrench used in the menu. -->
-    <path d="m13.7826 15.1719 2.1213-2.1213 5.9963 5.9962-2.1213 2.1213zM17.5 10c1.93 0 3.5-1.57 3.5-3.5 0-.58-.16-1.12-.41-1.6l-2.7 2.7-1.49-1.49 2.7-2.7c-.48-.25-1.02-.41-1.6-.41C15.57 3 14 4.57 14 6.5c0 .41.08.8.21 1.16l-1.85 1.85-1.78-1.78.71-.71-1.41-1.41L12 3.49c-1.17-1.17-3.07-1.17-4.24 0L4.22 7.03l1.41 1.41H2.81l-.71.71 3.54 3.54.71-.71V9.15l1.41 1.41.71-.71 1.78 1.78-7.41 7.41 2.12 2.12L16.34 9.79c.36.13.75.21 1.16.21z" transform="translate(366 366) scale(4)" fill="black"/>
+    <path d="m13.7826 15.1719 2.1213-2.1213 5.9963 5.9962-2.1213 2.1213zM17.5 10c1.93 0 3.5-1.57 3.5-3.5 0-.58-.16-1.12-.41-1.6l-2.7 2.7-1.49-1.49 2.7-2.7c-.48-.25-1.02-.41-1.6-.41C15.57 3 14 4.57 14 6.5c0 .41.08.8.21 1.16l-1.85 1.85-1.78-1.78.71-.71-1.41-1.41L12 3.49c-1.17-1.17-3.07-1.17-4.24 0L4.22 7.03l1.41 1.41H2.81l-.71.71 3.54 3.54.71-.71V9.15l1.41 1.41.71-.71 1.78 1.78-7.41 7.41 2.12 2.12L16.34 9.79c.36.13.75.21 1.16.21z" transform="translate(366 366) scale(4)" fill="#BE123C"/>
   </g>
 </svg>

@@ -68,13 +68,28 @@ Pliki tekstowe używają końców linii LF, zgodnie z `.gitattributes`.
 
 ## Ikona instalowanej aplikacji
 
-Manifest używa nazwy **MultiTool** i czarno-białej ikony psa z plakietką młotka
+Manifest używa nazwy **MultiTool** i pomarańczowej ikony psa na kremowym tle z plakietką młotka
 i klucza. Źródło wektorowe znajduje się w `public/multitool-icon.svg`.
 Gotowe eksporty obejmują PNG 192×192 i 512×512, ikonę Apple 180×180,
 favicon 16/32/48 px oraz osobną ikonę maskable 512×512. W wersji maskable
-grafika jest skalowana do 58% i centrowana na białym tle, aby mieściła się
+grafika jest skalowana do 58% i centrowana na kremowym tle, aby mieściła się
 w bezpiecznym okręgu o promieniu 40% szerokości obrazu.
 
 CI sprawdza nazwę aplikacji, wpisy manifestu, wymiary plików PNG,
 metadane Apple i rozmiary ikon zawartych w faviconie. Pliki graficzne są
 przechowywane w repozytorium; build nie wymaga ich generowania.
+
+## Typografia
+
+Aplikacja używa lokalnie hostowanego kroju Nunito Sans: tekst 400, etykiety
+oraz przyciski 600, nagłówki 700–800. Pliki WOFF2 w `public/fonts` obejmują
+łacinę oraz rozszerzoną łacinę z polskimi znakami. Font korzysta z `font-display: swap`, a licznik i wynik mają cyfry o jednakowej
+szerokości (`tabular-nums`).
+Pliki pochodzą z Google Fonts; licencja SIL OFL znajduje się w `public/fonts/OFL.txt`.
+Podczas korzystania z aplikacji font nie wymaga połączenia z Google Fonts.
+
+Pieski w liczniku używają `public/dog.svg`, z tą samą głową i pomarańczowym
+kolorem co ikona PWA. Ich rozmiar pozostaje bez zmian.
+
+Home wyświetla wspólny symbol SVG bez tła i cienia kafelka. Eksporty PNG oraz
+favicon mają kremowe tło `#FFF7F0`, dopasowane do bazowego tła aplikacji.

@@ -1,6 +1,9 @@
 import { Button, Card, CardContent, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-const title = 'Worktout Timer';
+import { useEffect, useId, useState } from 'react';
+import { warmColors, warmGradients } from '../theme';
+import ToolHeader from '../components/ToolHeader';
+import AlarmOnIcon from '@mui/icons-material/AlarmOn';
+const title = 'Workout Timer';
 const rowStyle = {
   margin: '0.5rem',
   textAlign: 'center' as const,
@@ -14,6 +17,10 @@ const iconRowStyle = {
   margin: '0.5rem',
   textAlign: 'center' as const,
   minHeight: '5.5rem',
+  display: 'flex',
+  flexWrap: 'wrap' as const,
+  justifyContent: 'center',
+  gap: '0.5rem',
 };
 
 const dogImageStyle = {
@@ -28,6 +35,7 @@ const defaultBreakTime: number = 60;
 let wakeLock: any = null;
 
 const WorkoutTimer = () => {
+  const ringId = useId();
   const [numberOfSets, setNumberOfSets] = useState(defaultNumberOfSets);
   const [brakeTime, setBreakTime] = useState(defaultBreakTime);
   const [numberOfSetsCompleted, setNumberOfSetsCompleted] = useState(0);
@@ -39,7 +47,7 @@ const WorkoutTimer = () => {
   const getCompletedSetsImages = () => {
     let dogsImages = [];
     for (let i = 0; i < numberOfSetsCompleted; i++) {
-      dogsImages.push(<img key={i} src='dog.png' alt='woof!' style={dogImageStyle} />);
+      dogsImages.push(<img key={i} src='dog.svg' alt='woof!' style={dogImageStyle} />);
     }
     return dogsImages;
   };
@@ -47,7 +55,7 @@ const WorkoutTimer = () => {
   const getSetsImages = () => {
     let dogsImages = [];
     for (let i = 0; i < numberOfSets; i++) {
-      dogsImages.push(<img key={i} src='dog.png' alt='woof!' style={dogImageStyle} />);
+      dogsImages.push(<img key={i} src='dog.svg' alt='woof!' style={dogImageStyle} />);
     }
     return dogsImages;
   };
@@ -117,7 +125,7 @@ const WorkoutTimer = () => {
       return (
         <Button
           size='large'
-          color='success'
+          color='primary'
           variant='contained'
           style={buttonStyle}
           onClick={handleBreakStart}
@@ -206,9 +214,10 @@ const WorkoutTimer = () => {
   if (!workoutActive) {
     return (
       <>
-        <div className='container-fluid'>
+        <div className='workout-content'>
+          <ToolHeader title='Workout Timer' description='Your sets, your pace. We will keep time.' icon={<AlarmOnIcon />} />
           <div className='row' style={rowStyle}>
-            <Card sx={{ minWidth: 275, background: '#d4eafd' }}>
+            <Card sx={{ background: warmGradients.peach }}>
               <CardContent>
                 <div className='row' style={rowStyle}>
                   <Typography variant='h5' component='h3' sx={{ mb: 1 }}>
@@ -242,7 +251,7 @@ const WorkoutTimer = () => {
                   </Typography>
                 </div>
                 <div className='row' style={rowStyle}>
-                  <Typography variant='h1' component='h3' sx={{ mb: 1 }}>
+                  <Typography variant='h1' component='h3' color='secondary.main' sx={{ mb: 1 }}>
                     {brakeTime}
                   </Typography>
                 </div>
@@ -283,10 +292,11 @@ const WorkoutTimer = () => {
   } else {
     return (
       <>
-        <div className='container-fluid'>
+        <div className='workout-content'>
+          <ToolHeader title='Workout Timer' description='Your sets, your pace. We will keep time.' icon={<AlarmOnIcon />} />
           <audio id='alarm' src='alarm.mp3' />
           <div className='row' style={rowStyle}>
-            <Card sx={{ minWidth: 275, background: '#e3f2e3' }}>
+            <Card sx={{ background: warmGradients.rose }}>
               <CardContent>
                 <div className='row' style={rowStyle}>
                   <Typography variant='h5' component='h3' sx={{ mb: 1 }}>
@@ -301,11 +311,30 @@ const WorkoutTimer = () => {
                     Time (s):
                   </Typography>
                 </div>
-                <div className='row' style={rowStyle}>
-                  <Typography variant='h1' component='h3' sx={{ mb: 1 }}>
-                    {counter}
-                  </Typography>
+                <div className='countdown-ring'>
+                  <svg viewBox='0 0 208 208' role='progressbar' aria-label='Break time remaining'
+                    aria-valuemin={0} aria-valuemax={brakeTime} aria-valuenow={workoutFinished ? 0 : counter}>
+                    <defs>
+                      <linearGradient id={ringId} x1='0' y1='0' x2='1' y2='1'>
+                        <stop offset='0%' stopColor={warmColors.orange} />
+                        <stop offset='55%' stopColor={warmColors.coral} />
+                        <stop offset='100%' stopColor={warmColors.pink} />
+                      </linearGradient>
+                    </defs>
+                    <circle cx='104' cy='104' r='88' className='ring-track' />
+                    <circle cx='104' cy='104' r='88' className='ring-progress'
+                      stroke={`url(#${ringId})`} pathLength='100' strokeDasharray='100'
+                      strokeDashoffset={100 - (workoutFinished ? 0 : counter / brakeTime * 100)}
+                      transform='rotate(-90 104 104)' />
+                  </svg>
+                  <div className='countdown-value'>
+                    <Typography variant='h1' component='h3' color='secondary.main'>{workoutFinished ? 0 : counter}</Typography>
+                    <Typography color='text.secondary' variant='body2'>seconds</Typography>
+                  </div>
                 </div>
+                <Typography color='text.secondary' sx={{ textAlign: 'center', mb: 2 }}>
+                  {workoutFinished ? 'Workout complete!' : countdownRunning ? 'Take a breath. Your next set is coming.' : 'Ready when you are.'}
+                </Typography>
                 <div className='row' style={rowStyle}>
                   <BreakButton />
                 </div>

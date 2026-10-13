@@ -48,6 +48,8 @@ test('counts a completed set, stops the break, and resets its countdown', () => 
   advanceSeconds(3);
 
   expect(screen.getByRole('heading', { name: '7' })).toBeInTheDocument();
+  expect(screen.getByRole('progressbar', { name: 'Break time remaining' }))
+    .toHaveAttribute('aria-valuenow', '7');
   expect(screen.getAllByRole('img', { name: 'woof!' })).toHaveLength(1);
   click('Stop');
   advanceSeconds(3);
@@ -68,6 +70,8 @@ test('plays the alarm when the break expires and stops it on request', () => {
   advanceSeconds(1);
 
   expect(screen.getByRole('heading', { name: '0' })).toBeInTheDocument();
+  expect(screen.getByRole('progressbar', { name: 'Break time remaining' }))
+    .toHaveAttribute('aria-valuenow', '0');
   expect(HTMLMediaElement.prototype.play).toHaveBeenCalledTimes(1);
   click('Stop');
   expect(HTMLMediaElement.prototype.pause).toHaveBeenCalledTimes(1);

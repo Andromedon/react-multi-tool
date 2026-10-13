@@ -7,26 +7,8 @@ const products: Product[] = [
   { id: 3, name: 'Margarine', concentration: 81, density: 1.33 },
 ];
 
-const rainbowColors: string[] = [
-  'red',
-  'darkorange',
-  'gold',
-  'green',
-  'blue',
-  'purple',
-];
-
 export const getProducts = async (): Promise<Product[]> => {
   return products;
-};
-
-export const getColor = (i: number): string => {
-  if (rainbowColors.length > i) {
-    return rainbowColors[i];
-  }
-
-  var index = Math.abs(rainbowColors.length - (i + 2 - rainbowColors.length));
-  return rainbowColors[index];
 };
 
 export const getBaseAmountInGrams = (
