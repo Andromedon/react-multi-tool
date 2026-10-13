@@ -46,12 +46,22 @@ alarm oraz zakończenie i ponowne rozpoczęcie treningu. Dźwięk jest zastępow
 mockiem, a odliczanie korzysta z kontrolowanego zegara testowego.
 Build produkcyjny trafia do katalogu `build`.
 
-Repozytorium zawiera workflow wdrożenia do Azure Static Web Apps uruchamiany
-przy pushu na `main` i obsłudze pull requestów do tej gałęzi.
-Przed wdrożeniem workflow instaluje zależności przez `npm ci` i uruchamia
-`npm run test:ci` na Node.js 22. Nieudane testy blokują krok wdrożenia.
-Testy uruchamiają się dla pushów na `main` oraz otwieranych, aktualizowanych
-i ponownie otwieranych pull requestów do `main`.
+Workflow Azure Static Web Apps zawiera trzy osobne zadania wykonywane kolejno:
+
+1. **Build** — instaluje zależności przez `npm ci`, wykonuje `npm run build`
+   i zapisuje katalog `build` jako artefakt `production-build` na 7 dni.
+2. **Test** — po poprawnym buildzie instaluje zależności i uruchamia
+   `npm run test:ci`. Błąd builda lub testów blokuje wdrożenie.
+3. **Deploy** — pobiera artefakt z tego samego uruchomienia workflow,
+   sprawdza obecność `index.html` i `staticwebapp.config.json`, a następnie
+   wdraża gotowe pliki do Azure bez ponownego budowania (`skip_app_build`).
+
+Build i testy używają Node.js 22. Wszystkie zadania działają na `ubuntu-24.04`,
+a akcje GitHub używają runtime Node.js 24. Checkout nie utrwala danych logowania
+w konfiguracji Git (`persist-credentials: false`).
+Workflow uruchamia się dla pushów na `main` oraz otwieranych, aktualizowanych
+i ponownie otwieranych pull requestów do `main`. Push wdraża produkcję,
+a pull request korzysta z dotychczasowego mechanizmu środowisk podglądu Azure.
 Konfiguracja `public/staticwebapp.config.json` zapewnia obsługę tras SPA.
 
 Pliki tekstowe używają końców linii LF, zgodnie z `.gitattributes`.
