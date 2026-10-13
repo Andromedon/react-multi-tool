@@ -50,6 +50,8 @@ test('counts a completed set, stops the break, and resets its countdown', () => 
   expect(screen.getByRole('heading', { name: '7' })).toBeInTheDocument();
   expect(screen.getByRole('progressbar', { name: 'Break time remaining' }))
     .toHaveAttribute('aria-valuenow', '7');
+  // The gap starts at twelve o'clock and advances clockwise as time elapses.
+  expect(document.querySelector('.ring-progress')).toHaveAttribute('stroke-dashoffset', '-30');
   expect(screen.getAllByRole('img', { name: 'woof!' })).toHaveLength(1);
   click('Stop');
   advanceSeconds(3);
@@ -69,12 +71,17 @@ test('plays the alarm when the break expires and stops it on request', () => {
   expect(HTMLMediaElement.prototype.play).not.toHaveBeenCalled();
   advanceSeconds(1);
 
-  expect(screen.getByRole('heading', { name: '0' })).toBeInTheDocument();
+  expect(screen.getByRole('status', { name: 'Break finished. Alarm ringing.' })).toBeInTheDocument();
+  expect(screen.queryByRole('heading', { name: '0' })).not.toBeInTheDocument();
+  expect(screen.queryByText('seconds')).not.toBeInTheDocument();
   expect(screen.getByRole('progressbar', { name: 'Break time remaining' }))
     .toHaveAttribute('aria-valuenow', '0');
   expect(HTMLMediaElement.prototype.play).toHaveBeenCalledTimes(1);
   click('Stop');
   expect(HTMLMediaElement.prototype.pause).toHaveBeenCalledTimes(1);
+  expect(screen.queryByRole('status', { name: 'Break finished. Alarm ringing.' })).not.toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: '10' })).toBeInTheDocument();
+  expect(screen.getByText('seconds')).toBeInTheDocument();
 });
 
 test('finishes after the last set without another break and starts a new workout', () => {

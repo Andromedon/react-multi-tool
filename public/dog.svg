@@ -1,14 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-labelledby="title">
   <title id="title">MultiTool dog</title>
+  <defs>
+    <linearGradient id="brand-gradient" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="472" y2="472">
+      <stop offset="0%" stop-color="#C2410C"/>
+      <stop offset="20%" stop-color="#BA4D29"/>
+      <stop offset="40%" stop-color="#B8444A"/>
+      <stop offset="60%" stop-color="#AE4160"/>
+      <stop offset="80%" stop-color="#A63B63"/>
+      <stop offset="100%" stop-color="#923668"/>
+    </linearGradient>
+  </defs>
   <g id="artwork">
-    <g fill="#FFF7F0" stroke="#C2410C" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="#FFF7F0" stroke="url(#brand-gradient)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
       <path d="M171 82 C135 48 103 77 76 115 C54 145 43 171 48 197 C52 223 81 237 111 218 L171 82Z"/>
       <path d="M341 82 C377 48 409 77 436 115 C458 145 469 171 464 197 C460 223 431 237 401 218 L341 82Z"/>
       <path d="M256 48 C193 48 157 73 137 124 C117 175 100 259 98 324 C94 405 148 448 256 448 C364 448 418 405 414 324 C412 259 395 175 375 124 C355 73 319 48 256 48Z"/>
       <path d="M214 286 C229 274 283 274 298 286 C311 303 283 333 256 339 C229 333 201 303 214 286Z"/>
       <path d="M256 339 V434"/>
     </g>
-    <g fill="#C2410C">
+    <g fill="url(#brand-gradient)">
       <circle cx="207" cy="207" r="19"/>
       <circle cx="305" cy="207" r="19"/>
     </g>

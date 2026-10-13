@@ -50,11 +50,11 @@ code {
 .home-tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .tool-shortcut { height: 100%; }
 .shortcut-icon { font-size: 36px !important; }
-.shortcut-action { display: flex; align-items: center; gap: 8px; color: #9D174D; font-weight: 700; }
+.shortcut-action { display: flex; align-items: center; gap: 8px; color: var(--warm-pink); font-weight: 700; }
 .result-panel { padding: 20px; border: 1px solid var(--warm-border); border-radius: 16px; background: rgba(255, 255, 255, 0.6); }
 .result-unit { font-size: 0.5em; font-weight: 600; margin-left: 12px; }
 .countdown-ring { width: min(256px, 100%); aspect-ratio: 1; position: relative; margin: 16px auto; }
-.countdown-ring svg { width: 100%; height: 100%; }
+.countdown-ring > svg { width: 100%; height: 100%; }
 .ring-track, .ring-progress { fill: none; stroke-width: 10; }
 .ring-track { stroke: #F0D3C8; }
 .ring-progress { stroke-linecap: round; transition: stroke-dashoffset 0.5s ease; }
@@ -66,6 +66,18 @@ code {
 }
 @media (prefers-reduced-motion: reduce) { .ring-progress { transition: none; } }
 @keyframes result-appear { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+.alarm-indicator { display: flex; align-items: center; justify-content: center; }
+.alarm-indicator .alarm-bell { width: clamp(3.5rem, 12vw, 6rem); height: clamp(3.5rem, 12vw, 6rem); font-size: clamp(3.5rem, 12vw, 6rem); flex-shrink: 0; transform-origin: 50% 15%; }
+@media (prefers-reduced-motion: no-preference) {
+  .alarm-bell { animation: alarm-ring 0.65s ease-in-out infinite; }
+}
+@keyframes alarm-ring {
+  0%, 100% { transform: rotate(0); }
+  15%, 45% { transform: rotate(15deg); }
+  30%, 60% { transform: rotate(-15deg); }
+  75% { transform: rotate(6deg); }
+}
 
 @media (max-width: 599px) {
   .converter-form .tool-header { gap: 12px; margin-bottom: 12px; }
@@ -83,3 +95,27 @@ code {
 }
 
 .countdown-value h3, .result-panel strong { font-variant-numeric: tabular-nums; }
+
+/* Leave room for browser chrome on small phone screens. */
+@media (max-width: 599px) {
+  html { font-size: 90%; }
+  .app-content { padding: 12px; }
+  .tool-header { gap: 12px; margin-bottom: 16px; }
+  .home-hero { padding: 16px 0 24px; }
+  .home-logo { width: 86px; height: 86px; margin-bottom: 16px; }
+  .countdown-ring { width: min(230px, 100%); margin: 12px auto; }
+  .converter-form .tool-header { margin-bottom: 8px; }
+  .converter-form .tool-header h1 { font-size: 1.5rem; }
+  .converter-form .tool-header p { line-height: 1.3; }
+  .converter-form .converter-grid { gap: 8px; }
+  .converter-form .converter-grid .row { margin-bottom: 6px !important; }
+  .converter-form .converter-grid > .row { margin-bottom: 0 !important; }
+  .converter-form .MuiCardContent-root,
+  .converter-form .MuiCardContent-root:last-child { padding: 10px; }
+  .converter-form .result-panel { padding: 10px; }
+  .converter-form .result-panel p { margin-top: 4px; }
+  .converter-form .converter-actions { gap: 4px; }
+  .converter-form .converter-actions > div { padding: 0; }
+}
+
+.ui-gradient-definitions { position: absolute; width: 0; height: 0; pointer-events: none; overflow: hidden; }

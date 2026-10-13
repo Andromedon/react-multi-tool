@@ -5,16 +5,25 @@ export const warmColors = {
   text: '#4B2923',
   mutedText: '#765047',
   orange: '#C2410C',
-  coral: '#BE123C',
-  pink: '#9D174D',
+  coral: '#B8444A',
+  pink: '#8E246A',
   border: '#F0D3C8',
 };
 
+export const warmAccentStops = [
+  { offset: 0, color: warmColors.orange },
+  { offset: 20, color: '#BA4D29' },
+  { offset: 40, color: warmColors.coral },
+  { offset: 60, color: '#AE4160' },
+  { offset: 80, color: '#A63B63' },
+  { offset: 100, color: '#923668' },
+];
+
 export const warmGradients = {
-  accent: 'linear-gradient(110deg, #C2410C 0%, #BE123C 55%, #9D174D 100%)',
-  peach: 'linear-gradient(135deg, #FFFAF5 0%, #FFE8D6 100%)',
-  rose: 'linear-gradient(135deg, #FFF9F6 0%, #FFE4EC 100%)',
-  home: 'linear-gradient(135deg, #FFFAF5, #FFE8D6 55%, #FFE4EC)',
+  accent: `linear-gradient(90deg, ${warmAccentStops.map(({ offset, color }) => `${color} ${offset}%`).join(', ')})`,
+  peach: 'linear-gradient(135deg, #FFFAF5 0%, #FFE5D4 100%)',
+  rose: 'linear-gradient(135deg, #FFF9F6 0%, #FFE5E5 100%)',
+  home: 'linear-gradient(135deg, #FFFAF5, #FFE5D4 60%, #FFE5E5)',
 };
 
 const focusRing = {
@@ -44,14 +53,18 @@ const theme = createTheme({
       styleOverrides: {
         ':root': {
           '--warm-border': warmColors.border,
+          '--warm-pink': warmColors.pink,
           '--warm-home-gradient': warmGradients.home,
           '--warm-card-shadow': '0 8px 24px rgba(106, 49, 44, 0.08)',
         },
         body: {
           minHeight: '100vh',
-          background: 'radial-gradient(ellipse at top left, #FFE8D6 0%, transparent 55%), radial-gradient(ellipse at bottom right, #FFE4EC 0%, transparent 55%), #FFF7F0',
+          background: 'radial-gradient(ellipse at top left, #FFE5D4 0%, transparent 55%), radial-gradient(ellipse at bottom right, #FFE5E5 0%, transparent 65%), #FFF7F0',
         },
         'a:focus-visible': focusRing,
+        '.tool-header-icon > svg, svg.shortcut-icon, .alarm-indicator .alarm-bell, .MuiRadio-root.Mui-checked:not(.Mui-disabled) svg': {
+          fill: 'url(#multitool-ui-gradient) #C2410C',
+        },
       },
     },
     MuiAppBar: {

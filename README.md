@@ -68,7 +68,7 @@ Pliki tekstowe używają końców linii LF, zgodnie z `.gitattributes`.
 
 ## Ikona instalowanej aplikacji
 
-Manifest używa nazwy **MultiTool** i pomarańczowej ikony psa na kremowym tle z plakietką młotka
+Manifest używa nazwy **MultiTool** i ikony psa z ciepłym gradientem na kremowym tle z plakietką młotka
 i klucza. Źródło wektorowe znajduje się w `public/multitool-icon.svg`.
 Gotowe eksporty obejmują PNG 192×192 i 512×512, ikonę Apple 180×180,
 favicon 16/32/48 px oraz osobną ikonę maskable 512×512. W wersji maskable
@@ -88,8 +88,17 @@ szerokości (`tabular-nums`).
 Pliki pochodzą z Google Fonts; licencja SIL OFL znajduje się w `public/fonts/OFL.txt`.
 Podczas korzystania z aplikacji font nie wymaga połączenia z Google Fonts.
 
-Pieski w liczniku używają `public/dog.svg`, z tą samą głową i pomarańczowym
-kolorem co ikona PWA. Ich rozmiar pozostaje bez zmian.
+Pieski w liczniku używają `public/dog.svg`, z tą samą głową i ciepłym
+gradientem co ikona PWA. Ich rozmiar pozostaje bez zmian.
 
 Home wyświetla wspólny symbol SVG bez tła i cienia kafelka. Eksporty PNG oraz
 favicon mają kremowe tło `#FFF7F0`, dopasowane do bazowego tła aplikacji.
+
+Na telefonach układ używa typografii mniejszej o 10% i ciaśniejszych odstępów,
+aby przelicznik mieścił się w obszarze 393×740 px po uwzględnieniu pasków
+przeglądarki. Duże pieski zachowują wysokość 80 px. Akcenty są bardziej różowe,
+a pierścień przerwy odsłania tło zgodnie z ruchem wskazówek zegara.
+
+Pieski, ikony narzędzi, dzwonek alarmu i zaznaczone radio buttony używają
+gradientu pomarańczowo-koralowo-różowego. Niezaznaczone i nieaktywne radio
+buttony pozostają jednokolorowe, aby zachować czytelne stany interakcji.
